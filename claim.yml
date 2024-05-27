@@ -1,0 +1,8 @@
+apiVersion: aws.crossplane.io/v1alpha1
+kind: Bucket
+metadata:
+  name: mybucket
+  namespace: default
+spec:
+  parameters:
+    name: "demo-aws-crossplane-bucket"

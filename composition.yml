@@ -1,0 +1,20 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xbucket.aws.crossplane.io
+spec:
+  compositeTypeRef:
+    apiVersion: aws.crossplane.io/v1alpha1
+    kind: XBucket
+  resources:
+    - name: s3bucket
+      base:
+        apiVersion: s3.aws.crossplane.io/v1alpha3
+        kind: Bucket
+        spec:
+          forProvider:
+            acl: private
+      patches:
+        - fromFieldPath: "spec.parameters.name"
+          toFieldPath: "spec.forProvider.name"
+          type: "FromCompositeFieldPath"
